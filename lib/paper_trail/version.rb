@@ -67,13 +67,14 @@ class Version < ActiveRecord::Base
           model = klass.new
         end
 
-        attrs.each do |k, v|
-        	begin
-	          model.send k.to_sym, v
-          rescue
-            logger.warn "Attribute #{k} does not exist on #{item_type} (Version id: #{id})."
-          end
-        end
+				model.attributes = attrs
+        #attrs.each do |k, v|
+        # 	begin
+	      #    model.send k.to_sym, v
+        #  rescue
+        #    logger.warn "Attribute #{k} does not exist on #{item_type} (Version id: #{id})."
+        #  end
+        #end
 
         model.send "#{model.class.version_association_name}=", self
 
